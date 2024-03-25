@@ -102,7 +102,7 @@ int main () {
 							break;
 						}
 						else {
-							if (a<c){
+							if (a>c){
 								printf ("El A es el mas grande");
 								break;
 							}
