@@ -39,6 +39,7 @@ int main () {
     for (i=0;i<3;i++){    
     total_comiciones=total_comiciones+((total_comiciones*10)/100);}
     sueldo_fin=total_comiciones;
+    printf ("Ganancia de comiciones %d\n", sueldo_fin-sueldo);
     printf ("El sueldo final %d", sueldo_fin);
     break;
     case 3:
