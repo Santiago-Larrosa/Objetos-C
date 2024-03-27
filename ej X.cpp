@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main () {
 
-    int can_alum=0,pago_final=0, pago_alum=0, eleccion=0, sueldo=0;
+    int can_alum=0,pago_final=0, pago_alum=0, eleccion=0, sueldo=0,i=0;
     int total_comiciones=0, sueldo_fin=0;
     float calificacion_parcial1, calificacion_parcial2, calificacion_parcial3;
     float calificacion_examen_final, calificacion_trabajo_final;
@@ -35,8 +35,10 @@ int main () {
     case 2:
     printf ("Ingrese su sueldo");
     scanf ("%d", & sueldo);
-    total_comiciones=((sueldo*30)/100);
-    sueldo_fin=total_comiciones+sueldo;
+    total_comiciones=sueldo;
+    for (i=0;i<3;i++){    
+    total_comiciones=total_comiciones+((total_comiciones*10)/100);}
+    sueldo_fin=total_comiciones;
     printf ("El sueldo final %d", sueldo_fin);
     break;
     case 3:
