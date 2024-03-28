@@ -1,33 +1,34 @@
     #include <stdio.h>
     int main () {
     int a=0,b=0,c=0,d=0,op=0,e=0,f=0,g=0;
+    float a2,b2,c2,d2,e2,f2,g2;
     printf ("Ingrese el numero de el ejercicio (11,12,13,14,15,16,17)");
     scanf ("%d",& op);
     switch (op){
         case 11:
                 printf("Ingrese la calificación del primer parcial: ");
-                scanf("%d", &a);
+                scanf("%f", &a2);
 
                 printf("Ingrese la calificación del segundo parcial: ");
-                scanf("%d", &b);
+                scanf("%f", &b2);
 
                 printf("Ingrese la calificación del tercer parcial: ");
-                scanf("%d", &c);
+                scanf("%f", &c2);
 
             
                 printf("Ingrese la calificación del examen final: ");
-                scanf("%d", &d);
+                scanf("%f", &d2);
 
                 
                 printf("Ingrese la calificación del trabajo final: ");
-                scanf("%d", &e);
+                scanf("%f", &e2);
 
             
-                f = (a + b + c) / 3.0;
+                f2 = (a2 + b2 + c2) / 3.0;
 
-                    g = 0.55 * f + 0.30 * d + 0.15 * e;
+                    g2 = 0.55 * f2 + 0.30 * d2 + 0.15 * e2;
 
-                    printf("La calificación final en la materia de Algoritmos es: %d\n", g);
+                    printf("La calificación final en la materia de Algoritmos es: %f\n", g2);
         break;
         case 12:
                 printf ("Ingrese su sueldo");
