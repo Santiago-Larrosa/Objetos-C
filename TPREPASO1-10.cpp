@@ -1,6 +1,6 @@
 #include <stdio.h>
 int main () {
-	int a=0,b=1,c=2,d=0, op=0;
+	int a=0,b=1,c=2,d=0, op=0, e=0;
 	printf ("Elija el ejercicio: (1,2,3,4,5,6,7,8,9,10)\n");
 	scanf ("%d", & op);
 	switch (op){
@@ -47,9 +47,11 @@ printf ("Ingrese la segunda nota:");
 scanf ("%d",& b);
 printf ("Ingrese la tercer nota:");
 scanf ("%d",& c);
+printf ("Ingrese la cuarta nota:");
+scanf ("%d",& e);
 printf ("Ingrese la cuarta nota de las tareas:");
 scanf ("%d",& d);
-if (((a+b+c+d)/4)>=6){
+if (((a+b+c+d+e)/5)>=6){
 	printf ("Aprobado!!");
 }
 else {
@@ -128,7 +130,7 @@ printf ("ahorras %d",((a*2)/100));
 		break;
 		case 9:
 			a=((50-20)*2)-50;
-printf ("sera dentro de %d años", a);
+printf ("sera dentro de %d aÃ±os", a);
 		break;
 		case 10:
 			printf ("Ingrese la cantidad de segundos");
