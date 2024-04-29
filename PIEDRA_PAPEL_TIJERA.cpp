@@ -26,25 +26,26 @@ int Ganador(int jugador, int maquina) {
 void mostrarResultado(int resultado) {
      
     if (resultado == 0)
-        printf("\n*------*\nEmpate\n------*\n");
+        printf("\n*------*\n Empate\n*------*\n");
     else if (resultado == 1)
-        printf("\n*-------*\n¡Ganaste!\n*-------*\n");
+        printf("\n*--------*\n ¡Ganaste!\n*--------*\n");
     else if (resultado == 2)
-        printf("\n*----------*\nPerdiste :( \n*----------*\n");
+        printf("\n*-----------*\n Perdiste :( \n*-----------*\n");
         else {
-            printf ("\n*-------------------------*\nPERDISTE POR NO SABER JUGAR\n*-------------------------*\n");
+            printf ("\n*---------------------------*\n PERDISTE POR NO SABER JUGAR\n*---------------------------*\n");
         }
 }
 
 
 int main() {
     srand(time(NULL)); // Inicializar números aleatorios
-
-    int puntajeJugador = 0;
-    int puntajeMaquina = 0;
+int JugadorRonda;
+     int  MaquinaRonda=0;
 
     for (int ronda = 1; ronda <= 5; ronda++) {
-        printf("Ronda %d:\n", ronda);
+    	int puntajeJugador = 0;
+    int puntajeMaquina = 0;
+        printf("\n Ronda:%d\n\n Maquina | Vos  \n   %d     :  %d  \n\n",ronda,MaquinaRonda,JugadorRonda);
         for (int vuelta = 1; vuelta <= 3; vuelta++) {
             int jugadaJugador, JugadaMaquina;
             char MaquinaOp[7];
@@ -76,23 +77,36 @@ int main() {
             // Actualizar puntajes
             if (resultado == 1){
                 puntajeJugador++;
+                
             }
             else if (resultado == 2 || resultado == -1){
                 puntajeMaquina++;
+             
               }
+            
+           
         }
-
+ if (puntajeJugador > puntajeMaquina){
+ 
+         JugadorRonda++;}
+    else if (puntajeJugador < puntajeMaquina)
+       {
+	   
+         MaquinaRonda++;}
     }
 
     // Determinar el ganador del campeonato
-    if (puntajeJugador > puntajeMaquina)
+    if (JugadorRonda > MaquinaRonda){
         printf("¡Felicidades, sos el ganador del campeonato!\n");
-    else if (puntajeJugador < puntajeMaquina)
+       }
+    else if (JugadorRonda < MaquinaRonda){
         printf("La máquina te gano  :( \n");
-    else
-        printf("El campeonato es un empate.\n");
-        
-        
+       }
+        else{
+		
+        printf ("Empate");}
+        printf("\n\n Maquina | Vos  \n   %d     :  %d  ",MaquinaRonda,JugadorRonda);
+       
         
     return 0;
 }
