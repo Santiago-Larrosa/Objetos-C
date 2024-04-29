@@ -92,7 +92,7 @@ int main() {
     else
         printf("El campeonato es un empate.\n");
         
-         printf ("JUGADOR\n");
+        
         
     return 0;
 }
