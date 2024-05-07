@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N 8 
 int fila_tes, col_tes;
-char tablero[N][N];
-int fila_pirata, col_pirata; 
-
+char **tablero;
+int fila_pirata, col_pirata;
+int N;
 
 void inicializarTablero() {
     srand(time(NULL));
@@ -14,49 +13,46 @@ void inicializarTablero() {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             if (i == 0 || i == N - 1 || j == 0 || j == N - 1) {
-                tablero[i][j] = 'X'; 
+                tablero[i][j] = 'X';
             } else {
-                tablero[i][j] = ' '; 
+                tablero[i][j] = ' ';
             }
         }
     }
 
-    fila_pirata = rand() % (N - 2) + 1; 
+    fila_pirata = rand() % (N - 2) + 1;
     col_pirata = rand() % (N - 2) + 1;
-    tablero[fila_pirata][col_pirata] = 'P'; 
+    tablero[fila_pirata][col_pirata] = 'P';
 
-  
+
     do {
         fila_tes = rand() % (N - 2) + 1;
         col_tes = rand() % (N - 2) + 1;
     } while (fila_tes == fila_pirata && col_tes == col_pirata);
-    tablero[fila_tes][col_tes] = 'T'; 
+    tablero[fila_tes][col_tes] = 'T';
 }
 
-
 void actualizarPirata(int nueva_fila, int nueva_col) {
-    
+
     tablero[fila_pirata][col_pirata] = ' ';
-    
+
     tablero[nueva_fila][nueva_col] = 'P';
-    
+
     fila_pirata = nueva_fila;
     col_pirata = nueva_col;
 }
-
 
 void test() {
     printf("fila_tes: %d, col_tes: %d\n", fila_tes, col_tes);
 }
 
-
 void dibujarTablero() {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             if (tablero[i][j] == 'P') {
-                printf("o ");
+                printf("P ");
             } else if (tablero[i][j] == 'T') {
-                printf("T ");
+                printf(". ");
             } else if (tablero[i][j] == 'X') {
                 printf("~ ");
             } else {
@@ -67,7 +63,6 @@ void dibujarTablero() {
     }
 }
 
-
 void buscarTesoro() {
     int movimientos = 0;
     int encontrado = 0;
@@ -75,14 +70,12 @@ void buscarTesoro() {
 
     printf("¡Comienza la búsqueda!\n");
 
-    
     while (movimientos < 50 && !encontrado && !perdido) {
         printf("Movimiento %d. Posición actual del pirata: (%d, %d)\n", movimientos + 1, fila_pirata, col_pirata);
         printf("Ingresa la dirección para mover al pirata (N/S/E/O): ");
         char direccion;
         scanf(" %c", &direccion);
 
-       
         int nueva_fila = fila_pirata;
         int nueva_col = col_pirata;
         switch (direccion) {
@@ -100,9 +93,7 @@ void buscarTesoro() {
                 break;
             default:
                 printf("Dirección inválida. Ingresa N, S, E u O.\n");
-                
         }
-
 
         if (tablero[nueva_fila][nueva_col] == 'X') {
             perdido = 1;
@@ -110,10 +101,8 @@ void buscarTesoro() {
             break;
         }
 
-        
         actualizarPirata(nueva_fila, nueva_col);
 
-        
         dibujarTablero();
 
         test();
@@ -125,13 +114,21 @@ void buscarTesoro() {
         movimientos++;
     }
 
-   
     if (!encontrado && !perdido)
         printf("Se acabaron los movimientos. ¡El tesoro sigue escondido!\n");
 }
 
 int main() {
     int opcion;
+
+    printf("Ingresa el tamaño del tablero (N x N): ");
+    scanf("%d", &N);
+
+   
+    tablero = (char **)malloc(N * sizeof(char *));
+    for (int i = 0; i < N; i++) {
+        tablero[i] = (char *)malloc(N * sizeof(char));
+    }
 
     do {
         printf("\nMENU\n");
@@ -161,6 +158,12 @@ int main() {
                 printf("Opción inválida. Inténtalo de nuevo.\n");
         }
     } while (opcion != 4);
+
+    // Free allocated memory
+    for (int i = 0; i < N; i++) {
+        free(tablero[i]);
+    }
+    free(tablero);
 
     return 0;
 }
