@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <time.h>
 
 int fila_tes, col_tes;
@@ -60,29 +61,57 @@ void test() {
 void dibujarTablero() {
 	//Recorro toda la matriz
     for (int i = 0; i < N; i++) {
+    
+        
         for (int j = 0; j < N; j++) {
+        		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        	 
         	//Asigno lo que se imprime correspondientemente
         	if (tablero[i][j] == 'Y'){
-				printf ("                     ~ ");
+        		printf ("                      ");
+        		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        		SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+				printf (" ");
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			}
             else if (tablero[i][j] == 'P') {
-                printf("P ");
+            	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+            	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_INTENSITY);
+                printf("  ");
             } else if (tablero[i][j] == 'T') {
-                printf(". ");
+            	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+                printf("  ");
+                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             } 
 			
 			else if (tablero[i][j] == 'X') {
 				if (i==0 && j==0){
-					printf ("                     ~ ");
+					printf ("                      ");
+					SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+						SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+					printf (" ");
+						SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 				}
 				else if (i==N-1 && j==0){
-					printf ("                     ~ ");
+					printf ("                      ");
+					SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+						SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+					printf (" ");
+					SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 				}
 				else{
-                printf("~ ");}
+					SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+					SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+                printf("  ");}
+                SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             } 
 			else {
-                printf(". ");
+				SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+				SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+                printf("  ");
+                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             }
         }
         printf("\n");
@@ -120,13 +149,13 @@ void buscarTesoro() {
                 nueva_col = (col_pirata < N - 1) ? col_pirata + 1 : col_pirata;
                 break;
             case 'O':
-                nueva_col = (col_pirata > 0) ? col_pirata - 1 : col_pirata;
+                nueva_col = (col_pirata > N-N) ? col_pirata - 1 : col_pirata;
                 break;
             default:
                 printf("    Dirección inválida. Ingresa N, S, E u O.\n");
         }
         //Me fijo si toco agua
-        if (tablero[nueva_fila][nueva_col] == 'X') {
+       if (tablero[nueva_fila][nueva_col] == 'X' || tablero[nueva_fila][nueva_col] == 'Y') {
             perdido = 1;
             printf("    Te has hundido en el agua! Has perdido!\n");
             break;
@@ -143,26 +172,30 @@ void buscarTesoro() {
             encontrado = 1;
         }
         //Actualizo los movimientos
-        movimientos++;
-    }
-    //Aviso si pierde en el caso de haber llegado a 50 y no haber encontrado el tesoro
+	        movimientos++;
+	    }
+	    //Aviso si pierde en el caso de haber llegado a 50 y no haber encontrado el tesoro
     if (!encontrado && !perdido)
         printf("    Se acabaron los movimientos.\n");
 }
 
 int main() {
     int opcion;
+   
     //Pregunto el tamaño del tablero
     printf("    Ingresa el tamaño del tablero (N x N): ");
     scanf("%d", &N);
 
-   // Se lo pedi a chatGPT y sirve para asignar el tamaño de tablero
+
+   //sirve para asignar el tamaño de tablero
     tablero = (char **)malloc(N * sizeof(char *));
     for (int i = 0; i < N; i++) {
         tablero[i] = (char *)malloc(N * sizeof(char));
     }
     //MENU
     do {
+    	
+    	
         printf("\n                        -MENU-\n");
         printf("      ------------Cree el tablero(1)------------\n");
         printf("      ------------Dibujar Tablero(2)------------\n");
