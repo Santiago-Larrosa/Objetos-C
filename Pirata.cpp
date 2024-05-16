@@ -60,6 +60,7 @@ void test() {
 //Funcion para dibujar el tablero
 void dibujarTablero() {
 	//Recorro toda la matriz
+	system("cls");
     for (int i = 0; i < N; i++) {
     
         
