@@ -190,10 +190,10 @@ void buscarTesoro() {
 
 int main() {
     int opcion;
-   
+   	do {
     //Pregunto el tamaño del tablero
     printf("    Ingresa el tamaño del tablero (N x N): ");
-    scanf("%d", &N);
+    scanf("%d", &N);}while (N<4);
 
 
    //sirve para asignar el tamaño de tablero
