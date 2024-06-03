@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 
 int sudoku[9][9]; 
 
@@ -13,21 +14,21 @@ int validarMovimiento(int num, int fila, int columna) {
     }
     
     // Calcular el inicio de la fila y columna del recuadro interno 3x3
-    int startFila = (fila / 3) * 3;
-    int startCol = (columna / 3) * 3;
+    int comFila = (fila / 3) * 3;
+    int comCol = (columna / 3) * 3;
 
     // Verificar el recuadro interno de 3x3
-    for (int i = startFila; i < startFila + 3; i++) {
-        for (int j = startCol; j < startCol + 3; j++) {
+    for (int i = comFila; i < comFila + 3; i++) {
+        for (int j = comCol; j < comCol + 3; j++) {
             if (sudoku[i][j] == num) {
-                return 0; // Número ya existe en el recuadro 3x3
+                return 0; // Número que ya existe en el recuadro 3x3
             }
         }
     }
 
     return 1; // Movimiento válido
 }
-
+//Imprime sudoku
 void imprimirSudoku() {
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
@@ -40,14 +41,14 @@ void imprimirSudoku() {
         printf("\n");
     }
 }
-
+//Creao sudoku
 void CrearSudoku(){
     srand(time(NULL));
     int num, fila, columna;
 
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
-            sudoku[i][j] = 0; // Inicializar el tablero con ceros
+            sudoku[i][j] = 0; // Inicializar el tablero con cero
         }
     }
 
@@ -56,9 +57,20 @@ void CrearSudoku(){
         for (int j = 0; j < 9; j++) {
             int intentos = 0;
             do {
+            	//entre 1 y 9
                 num = rand() % 9 + 1;
                 intentos++;
-                if (intentos > 50) break; // Evitar muchas iteraciones
+                if (intentos > 50) {
+				//Si hay muchos errores vuelvo a empezar
+				for (i = 0; i < 9; i++){
+					for (j = 0; j < 9; j++){
+						sudoku [i][j]=0;
+					} 
+				}
+				i=0;
+				j=0;
+				intentos=0; }
+				//Funciona hasta que se valida
             } while (!validarMovimiento(num, i, j));
             if (intentos <= 50) {
                 sudoku[i][j] = num;
@@ -71,11 +83,11 @@ void SudokuDificultad(int dificultad){
     srand(time(NULL));
     int dif = 0;
     int i = 0, j = 0;
-    int Base[9][9] = {0}; // Inicializar el tablero base a cero
+    int Base[9][9] = {0}; // Inicializar el tablero a cero
 
     switch (dificultad) {
         case 1:
-            dif = 45;
+            dif = 80;
             break;
         case 2:
             dif = 32;
@@ -93,8 +105,8 @@ void SudokuDificultad(int dificultad){
         do {
             fila_num = rand() % 9;
             col_num = rand() % 9;
-        } while (Base[fila_num][col_num] == 10); // Repetir hasta encontrar una celda vacía
-        Base[fila_num][col_num] = 10; // Marcar la celda con un 10 para mostrar que se debe revelar
+        } while (Base[fila_num][col_num] == 10); 
+        Base[fila_num][col_num] = 10; 
     }
 
     for (i = 0; i < 9; i++) {
@@ -114,10 +126,35 @@ void SudokuDificultad(int dificultad){
 		}
 	}
 }
+int Ganar (){
+	int i=0;
+	int j=0;
+	int gano=0;
+	for (i = 0; i < 9; i++){
+					for (j = 0; j < 9; j++){
+						if (sudoku[i][j]==0){
+							gano++;
+						}
+	
+}
+
+
+}
+if (gano==0){
+	return 1;
+	
+}
+else {
+	return 0;
+	
+}
+}
 
 void jugarSudoku() {
     int numero, X, Y;
-    for (int k = 0; k < 9; k++) {
+    int k=0;
+    do {
+    	system("cls");
         imprimirSudoku();
         printf("Ingrese el número: ");
         scanf("%d", &numero);
@@ -136,9 +173,19 @@ void jugarSudoku() {
             continue;
         }
         sudoku[X][Y] = numero;
-    }
-    imprimirSudoku();
+         int hola = Ganar ();
+    if (hola==1){
+    	printf ("GANASTE!!!!");
+    	k=10;
+		}
+		if (k==9){
+			 imprimirSudoku();
+		}
+	k++;
+    }  while (k<9);
+   
 }
+
 
 int main() {
     // Inicializar el sudoku con ceros
