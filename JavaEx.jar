@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+public class EjerciciosJava {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Parte 1: Números del 1 al 100 e informar si son pares
+        System.out.println("Parte 1: Números del 1 al 100 y su paridad");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                System.out.println("Número: " + i + " es par");
+            } else {
+                System.out.println("Número: " + i + " es impar");
+            }
+        }
+
+        // Parte 2: Números del 50 al 100 e informar si son primos, de lo contrario mostrar divisores
+        System.out.println("\nParte 2: Números del 50 al 100 y su primalidad");
+        for (int i = 50; i <= 100; i++) {
+            if (esPrimo(i)) {
+                System.out.println("Número: " + i + " es primo");
+            } else {
+                System.out.print("Número: " + i + " no es primo. Divisores: ");
+                for (int j = 1; j <= i / 2; j++) {
+                    if (i % j == 0) {
+                        System.out.print(j + " ");
+                    }
+                }
+                System.out.println(i); // Incluyendo el número mismo como divisor
+            }
+        }
+
+        // Parte 3: Pedir números por pantalla hasta que alguno sea mayor a 100 y primo
+        System.out.println("\nParte 3: Introduce números (mayores a 100 y primos para terminar)");
+        int numero;
+        do {
+            System.out.print("Introduce un número: ");
+            numero = scanner.nextInt();
+        } while (numero <= 100 || !esPrimo(numero));
+        System.out.println("Número " + numero + " es mayor a 100 y primo. Terminando el programa.");
+
+        // Parte 4: Calculadora c
+        System.out.println("\nParte 4: Calculadora simple");
+        System.out.print("Introduce el primer número: ");
+        double num1 = scanner.nextDouble();
+        System.out.print("Introduce el segundo número: ");
+        double num2 = scanner.nextDouble();
+        System.out.print("Introduce la operación (+, -, *, /): ");
+        char operacion = scanner.next().charAt(0);
+        
+        switch (operacion) {
+            case '+':
+                System.out.println("Resultado: " + (num1 + num2));
+                break;
+            case '-':
+                System.out.println("Resultado: " + (num1 - num2));
+                break;
+            case '*':
+                System.out.println("Resultado: " + (num1 * num2));
+                break;
+            case '/':
+                if (num2 != 0) {
+                    System.out.println("Resultado: " + (num1 / num2));
+                } else {
+                    System.out.println("Error: División por cero");
+                }
+                break;
+            default:
+                System.out.println("Operación no válida");
+                break;
+        }
+
+        // Parte 5: Uso del for-each
+        // Recorre el array y lo imprime
+        System.out.println("\nParte 5: Ejemplo de uso del for-each");
+        int[] numeros = {1, 2, 3, 4, 5};
+        System.out.println("Números en el array:");
+        for (int numeroArray : numeros) {
+            System.out.println(numeroArray);
+        }
+
+        scanner.close();
+    }
+
+    // Método para determinar si un número es primo
+    private static boolean esPrimo(int num) {
+        if (num <= 1) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+        for (int i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+}
