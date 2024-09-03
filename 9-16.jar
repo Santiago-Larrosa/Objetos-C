@@ -1,0 +1,87 @@
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce un caracter");
+        char caracter = sc.next().charAt(0);
+ 
+        int codigo = (int) caracter;
+ 
+        System.out.println(codigo);
+        Scanner sd = new Scanner(System.in);
+        System.out.println("Introduce un precio");
+        double precio = sc.nextDouble();
+        System.out.println("El precio es: " + (precio+(precio*0.21)));
+        int n = 1;
+        while (n<101){
+            System.out.println(n);
+            n=n+1;
+        }
+        for (int i = 0; i<101; i++){
+            if (i%2==0){
+              System.out.println(i);  
+            }
+             else {
+                 if (i%3==0){
+                     System.out.println(i);  
+                 }
+             }
+          
+        }
+        Scanner sp = new Scanner(System.in);
+        System.out.println("Introduce el numero de ventas");
+        int Ventas=sp.nextInt();
+ 
+        int sumVentas=0;
+        for (int i=0;i<Ventas;i++){
+            System.out.println("Introduce el precio de la venta "+(i+1));
+            int venta=sc.nextInt();
+            sumVentas=sumVentas+venta;
+        }
+ 
+        System.out.println(sumVentas);
+         Scanner sr = new Scanner(System.in);
+        System.out.println("Introduce el valor de a");
+        int a=sr.nextInt();
+        System.out.println("Introduce el valor de b");
+        int b=sr.nextInt();
+        System.out.println("Introduce el valor de c");
+        int c=sr.nextInt();
+ 
+        double discriminante=Math.pow(b, 2)-(4*a*c);
+ 
+        System.out.println(">>"+discriminante);
+ 
+        if (discriminante>0){
+            double x1=((b*(-1))+Math.sqrt(discriminante))/(2*a);
+            double x2=((b*(-1))-Math.sqrt(discriminante))/(2*a);
+ 
+            System.out.println("El valor de x1 es "+x1+" y el valor de x2 es "+x2);
+        }else{
+            System.out.println("El discriminante es negativo");
+        }
+        int numb;
+        do {
+        System.out.println("Introduce el valor del numero");
+        numb=sr.nextInt();
+        
+        }while (numb<0);
+        String contras = "contra";
+        System.out.println(numb);
+        int i;
+        for (i=0;i<3;i++){
+        Scanner sg = new Scanner(System.in);
+        System.out.println("Introduce contrasena, intento: " +(i+1));
+        String rata=sg.nextLine();
+        if (rata.equals(contras)){
+            System.out.println("Enhorabuena");
+            break;
+        }
+        else {
+            System.out.println("ERROR");
+        }
+        }
+	}
+}
+	
