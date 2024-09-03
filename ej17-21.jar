@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        System.out.println("Introduce un día de la semana:");
+        String dia = scanner.nextLine().toLowerCase();
+        switch (dia) {
+            case "lunes":
+            case "martes":
+            case "miércoles":
+            case "jueves":
+            case "viernes":
+                System.out.println("Es un día laboral.");
+                break;
+            case "sábado":
+            case "domingo":
+                System.out.println("No es un día laboral.");
+                break;
+            default:
+                System.out.println("Día no válido.");
+        }
+
+       
+        System.out.println("\nIntroduce el primer número:");
+        int num1 = scanner.nextInt();
+        System.out.println("Introduce el segundo número:");
+        int num2 = scanner.nextInt();
+
+        System.out.println("10 números aleatorios entre " + num1 + " y " + num2 + ":");
+        for (int i = 0; i < 10; i++) {
+            int randomNum = (int) (Math.random() * (Math.abs(num2 - num1) + 1)) + Math.min(num1, num2);
+            System.out.println(randomNum);
+        }
+
+        
+        System.out.println("\nIntroduce un número entero positivo:");
+        int numero = scanner.nextInt();
+        while (numero <= 0) {
+            System.out.println("El número debe ser positivo. Inténtalo de nuevo:");
+            numero = scanner.nextInt();
+        }
+
+        int cifras = String.valueOf(numero).length();
+        System.out.println("El número " + numero + " tiene " + cifras + " cifras.");
+
+       
+        System.out.println("\Introduce un número para saber si es primo:");
+        int numPrimo = scanner.nextInt();
+        if (numPrimo <= 1) {
+            System.out.println(numPrimo + " no es un número primo.");
+        } else {
+            boolean esPrimo = true;
+            for (int i = 2; i <= Math.sqrt(numPrimo); i++) {
+                if (numPrimo % i == 0) {
+                    esPrimo = false;
+                    break;
+                }
+            }
+            if (esPrimo) {
+                System.out.println(numPrimo + " es un número primo.");
+            } else {
+                System.out.println(numPrimo + " no es un número primo.");
+            }
+        }
+
+        
+        System.out.println("\Números primos entre 1 y 100:");
+        for (int i = 2; i <= 100; i++) {
+            boolean esPrimo = true;
+            for (int j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j == 0) {
+                    esPrimo = false;
+                    break;
+                }
+            }
+            if (esPrimo) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+}
