@@ -1,0 +1,58 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+	    int a = 50;
+	    int b = 20;
+	    String nombre = "Santiago";
+		System.out.println("La suma es:"+(a+b));
+		System.out.println("La restas es:"+(a-b));
+		System.out.println("La multiplicacion es:"+(a*b));
+		System.out.println("La divicion es:"+(a/b));
+		
+		 if (a<b){
+		     System.out.println("el b es el mas grande");
+		 }
+		 if (a>b){
+		     System.out.println("el a es el mas grande");
+		 }
+		else {
+		     System.out.println("son iguales");
+		}
+		System.out.println("mi nombre es: "+(nombre));
+		 Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce tu nombre");
+        String nombre1=sc.nextLine();
+ 
+        System.out.println("Bienvenido "+nombre1);
+        Scanner sd = new Scanner(System.in);
+        System.out.println("Dame el radio");
+        double radio=sd.nextDouble();
+ 
+        System.out.println("el area del circulo es: "+(radio*(Math.PI*Math.PI)));
+         Scanner sp = new Scanner(System.in);
+        System.out.println("Dame un numero");
+        int numero=sd.nextInt();
+        if (numero%2==0){
+            System.out.println("es par");
+        }
+        else {
+            System.out.println("es impar");
+        }
+        Scanner st = new Scanner(System.in);
+        System.out.println("Dame un codigo");
+        String num=st.nextLine();
+        int codigo=Integer.parseInt(num);
+ 
+		char caracter=(char)codigo;
+ 
+		System.out.println(caracter);
+	}
+}
