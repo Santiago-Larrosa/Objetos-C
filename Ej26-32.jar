@@ -1,0 +1,141 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Elige un ejercicio:");
+            System.out.println("26. Sumar números del 1 al número ingresado");
+            System.out.println("27. Contar números introducidos hasta ingresar -1");
+            System.out.println("28. Eliminar espacios de una frase");
+            System.out.println("29. Concatenar frases hasta ingresar una cadena vacía");
+            System.out.println("30. Convertir una frase a mayúsculas o minúsculas");
+            System.out.println("31. Mostrar la longitud de una cadena");
+            System.out.println("32. Comparar dos palabras");
+            System.out.println("0. Salir");
+            System.out.print("Introduce el número del ejercicio: ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); 
+
+            switch (opcion) {
+                case 26:
+                    sumaHastaNumero(scanner);
+                    break;
+                case 27:
+                    contarNumeros(scanner);
+                    break;
+                case 28:
+                    eliminarEspacios(scanner);
+                    break;
+                case 29:
+                    concatenarFrases(scanner);
+                    break;
+                case 30:
+                    convertirFrase(scanner);
+                    break;
+                case 31:
+                    mostrarLongitud(scanner);
+                    break;
+                case 32:
+                    compararPalabras(scanner);
+                    break;
+                case 0:
+                    System.out.println("Saliendo...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opción no válida.");
+                    break;
+            }
+        }
+    }
+
+  
+    private static void sumaHastaNumero(Scanner scanner) {
+        System.out.print("Introduce un número mayor que 1: ");
+        int numero = scanner.nextInt();
+        if (numero <= 1) {
+            System.out.println("El número debe ser mayor que 1.");
+            return;
+        }
+        int suma = 0;
+        for (int i = 1; i <= numero; i++) {
+            suma += i;
+        }
+        System.out.println("La suma del 1 al " + numero + " es: " + suma);
+    }
+
+   
+    private static void contarNumeros(Scanner scanner) {
+        int count = 0;
+        while (true) {
+            System.out.print("Introduce un número (-1 para terminar): ");
+            int numero = scanner.nextInt();
+            if (numero == -1) break;
+            count++;
+        }
+        System.out.println("Número de números introducidos: " + count);
+    }
+
+   
+    private static void eliminarEspacios(Scanner scanner) {
+        System.out.print("Introduce una frase: ");
+        String frase = scanner.nextLine();
+        String fraseSinEspacios = frase.replace(" ", "");
+        System.out.println("Frase sin espacios: " + fraseSinEspacios);
+    }
+
+   
+    private static void concatenarFrases(Scanner scanner) {
+        StringBuilder resultado = new StringBuilder();
+        while (true) {
+            System.out.print("Introduce una frase (cadena vacía para terminar): ");
+            String frase = scanner.nextLine();
+            if (frase.isEmpty()) break;
+            resultado.append(frase).append(" ");
+        }
+        System.out.println("Cadena resultante: " + resultado.toString().trim());
+    }
+
+    
+    private static void convertirFrase(Scanner scanner) {
+        System.out.print("Introduce una frase: ");
+        String frase = scanner.nextLine();
+        System.out.println("Elige una opción: ");
+        System.out.println("1. Convertir a mayúsculas");
+        System.out.println("2. Convertir a minúsculas");
+        int opcion = scanner.nextInt();
+        scanner.nextLine(); 
+
+        if (opcion == 1) {
+            System.out.println("Frase en mayúsculas: " + frase.toUpperCase());
+        } else if (opcion == 2) {
+            System.out.println("Frase en minúsculas: " + frase.toLowerCase());
+        } else {
+            System.out.println("Opción no válida.");
+        }
+    }
+
+   
+    private static void mostrarLongitud(Scanner scanner) {
+        System.out.print("Introduce una cadena: ");
+        String cadena = scanner.nextLine();
+        System.out.println("La longitud de la cadena es: " + cadena.length());
+    }
+
+  
+    private static void compararPalabras(Scanner scanner) {
+        System.out.print("Introduce la primera palabra: ");
+        String palabra1 = scanner.nextLine();
+        System.out.print("Introduce la segunda palabra: ");
+        String palabra2 = scanner.nextLine();
+
+        if (palabra1.equals(palabra2)) {
+            System.out.println("Las palabras son iguales.");
+        } else {
+            System.out.println("Las palabras son diferentes.");
+        }
+    }
+}
