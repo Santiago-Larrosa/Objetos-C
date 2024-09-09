@@ -1,1 +1,130 @@
+import java.util.Scanner;
+
+public class EjerciciosJava {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Elige un ejercicio:");
+        System.out.println("1. Contar vocales");
+        System.out.println("2. Reemplazar a por e");
+        System.out.println("3. Mostrar códigos ASCII");
+        System.out.println("4. Calculadora Polaca Inversa");
+        System.out.print("Introduce el número del ejercicio: ");
+        int opcion = scanner.nextInt();
+        scanner.nextLine(); 
+
+        switch (opcion) {
+            case 1:
+                contarVocales();
+                break;
+            case 2:
+                reemplazarCaracteres();
+                break;
+            case 3:
+                mostrarCodigosASCII();
+                break;
+            case 4:
+                calculadoraPolacaInversa(scanner);
+                break;
+            default:
+                System.out.println("Opción no válida.");
+                break;
+        }
+
+        scanner.close();
+    }
+
+    
+    private static void contarVocales() {
+        String frase = "La lluvia en Sevilla es una maravilla";
+        int contadorVocales = 0;
+
+        for (int i = 0; i < frase.length(); i++) {
+            char c = frase.charAt(i);
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+                c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+                contadorVocales++;
+            }
+        }
+
+        System.out.println("Número total de vocales: " + contadorVocales);
+    }
+
+   
+    private static void reemplazarCaracteres() {
+        String frase = "La lluvia en Sevilla es una maravilla";
+        String nuevaFrase = frase.replace('a', 'e');
+        System.out.println("Frase con 'a' reemplazada por 'e': " + nuevaFrase);
+    }
+
+   
+    private static void mostrarCodigosASCII() {
+        String frase = "La lluvia en Sevilla es una maravilla";
+        StringBuilder asciiCodes = new StringBuilder();
+
+        for (int i = 0; i < frase.length(); i++) {
+            char c = frase.charAt(i);
+            asciiCodes.append((int) c).append(" ");
+        }
+
+        System.out.println("Códigos ASCII: " + asciiCodes.toString().trim());
+    }
+
+   
+    private static void calculadoraPolacaInversa(Scanner scanner) {
+        try {
+           
+            System.out.print("Introduce el primer operando (int): ");
+            int operando1 = scanner.nextInt();
+            System.out.print("Introduce el segundo operando (int): ");
+            int operando2 = scanner.nextInt();
+            scanner.nextLine(); 
+            System.out.print("Introduce el operador (+, -, *, /, ^, %): ");
+            String operador = scanner.nextLine();
+
+            double resultado = 0;
+            boolean operacionValida = true;
+
+           
+            switch (operador) {
+                case "+":
+                    resultado = operando1 + operando2;
+                    break;
+                case "-":
+                    resultado = operando1 - operando2;
+                    break;
+                case "*":
+                    resultado = operando1 * operando2;
+                    break;
+                case "/":
+                    if (operando2 != 0) {
+                        resultado = (double) operando1 / operando2;
+                    } else {
+                        System.out.println("Error: División por cero");
+                        operacionValida = false;
+                    }
+                    break;
+                case "^":
+                    resultado = Math.pow(operando1, operando2);
+                    break;
+                case "%":
+                    resultado = operando1 % operando2;
+                    break;
+                default:
+                    System.out.println("Operador no válido");
+                    operacionValida = false;
+                    break;
+            }
+
+           
+            if (operacionValida) {
+                System.out.println("El resultado de " + operando1 + " " + operador + " " + operando2 + " es: " + resultado);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: Entrada no válida. Asegúrate de introducir números enteros.");
+            scanner.next();  // Limpiar el buffer en caso de error
+        }
+    }
+}
 
