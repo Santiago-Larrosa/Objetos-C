@@ -1,0 +1,28 @@
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Definir el formato de la hora (HH:mm:ss)
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        while (true) {
+            // Obtener la hora actual
+            LocalTime horaActual = LocalTime.now();
+
+            // Formatear la hora en formato HH:mm:ss
+            String horaFormateada = horaActual.format(formatoHora);
+
+            // Imprimir la hora en la consola
+            System.out.print("\r" + "Hora actual: " + horaFormateada);
+
+            // Esperar 1 segundo (1000 milisegundos)
+            try {
+                Thread.sleep(1000); // Pausa de 1 segundo
+            } catch (InterruptedException e) {
+                System.err.println("Error al pausar el hilo.");
+            }
+        }
+    }
+}
