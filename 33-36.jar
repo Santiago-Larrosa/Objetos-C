@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+public class Ejercicios {
+
+    
+    public static void extraerLetras(String cadena) {
+        if (cadena.length() >= 5) {
+            String resultado = cadena.substring(3, 5);  
+            System.out.println("La cuarta y quinta letra son: " + resultado);
+        } else {
+            System.out.println("La cadena es muy corta.");
+        }
+    }
+
+  
+    public static void separarFrase(String frase) {
+        String[] palabras = frase.split(" ");
+        System.out.println("Las palabras de la frase son:");
+        for (String palabra : palabras) {
+            System.out.println(palabra);
+        }
+    }
+
+    
+    public enum DiaSemana {
+        LUNES(true), MARTES(true), MIERCOLES(true), JUEVES(true), VIERNES(true), 
+        SABADO(false), DOMINGO(false);
+
+        private boolean esLaboral;
+
+        DiaSemana(boolean esLaboral) {
+            this.esLaboral = esLaboral;
+        }
+
+        public boolean esLaboral() {
+            return esLaboral;
+        }
+    }
+
+    
+    public enum DiaSemanaModificado {
+        LUNES(true), MARTES(true), MIERCOLES(true), JUEVES(true), VIERNES(true), 
+        SABADO(false), DOMINGO(false);
+
+        private boolean esLaboral;
+
+        DiaSemanaModificado(boolean esLaboral) {
+            this.esLaboral = esLaboral;
+        }
+
+        @Override
+        public String toString() {
+            return this.name() + (esLaboral ? " es un día laboral." : " no es un día laboral.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        System.out.println("Ejercicio 33: Ingrese una cadena de texto:");
+        String cadena = scanner.nextLine();
+        extraerLetras(cadena);
+
+      
+        System.out.println("\nEjercicio 34: Ingrese una frase:");
+        String frase = scanner.nextLine();
+        separarFrase(frase);
+
+        
+        System.out.println("\nEjercicio 35: Ingrese un día de la semana (en mayúsculas):");
+        String diaInput = scanner.nextLine().toUpperCase();
+        try {
+            DiaSemana dia = DiaSemana.valueOf(diaInput);
+            if (dia.esLaboral()) {
+                System.out.println(diaInput + " es un día laboral.");
+            } else {
+                System.out.println(diaInput + " no es un día laboral.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Día no válido.");
+        }
+
+      
+        System.out.println("\nEjercicio 36: Ingrese otro día de la semana (en mayúsculas):");
+        String diaInputModificado = scanner.nextLine().toUpperCase();
+        try {
+            DiaSemanaModificado diaModificado = DiaSemanaModificado.valueOf(diaInputModificado);
+            System.out.println(diaModificado.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Día no válido.");
+        }
+
+        scanner.close();
+    }
+}
