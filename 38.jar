@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Ejercicio38 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int numero;
+        int mayor = Integer.MIN_VALUE;
+        int menor = Integer.MAX_VALUE;
+        int sumaTotal = 0;
+        int sumaPositivos = 0;
+        int sumaNegativos = 0;
+        int cantidadNumeros = 0;
+
+        System.out.println("Introduce números (introduce -1 para terminar):");
+        while (true) {
+            numero = scanner.nextInt();
+
+            if (numero == -1) {
+                break;
+            }
+
+            if (numero > mayor) {
+                mayor = numero;
+            }
+            if (numero < menor) {
+                menor = numero;
+            }
+
+            sumaTotal += numero;
+            cantidadNumeros++;
+
+            if (numero > 0) {
+                sumaPositivos += numero;
+            } else if (numero < 0) {
+                sumaNegativos += numero;
+            }
+        }
+
+        double media = (cantidadNumeros > 0) ? (double) sumaTotal / cantidadNumeros : 0;
+
+        System.out.println("Mayor número introducido: " + mayor);
+        System.out.println("Menor número introducido: " + menor);
+        System.out.println("Suma de todos los números: " + sumaTotal);
+        System.out.println("Suma de los números positivos: " + sumaPositivos);
+        System.out.println("Suma de los números negativos: " + sumaNegativos);
+        System.out.println("Media de la suma total: " + media);
+
+        scanner.close();
+    }
+}
