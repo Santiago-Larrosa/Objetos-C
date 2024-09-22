@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+public class Ejercicio37 {
+
+    
+    public enum Mes {
+        ENERO(1, 31),
+        FEBRERO(2, 28),  // Siempre 28 días
+        MARZO(3, 31),
+        ABRIL(4, 30),
+        MAYO(5, 31),
+        JUNIO(6, 30),
+        JULIO(7, 31),
+        AGOSTO(8, 31),
+        SEPTIEMBRE(9, 30),
+        OCTUBRE(10, 31),
+        NOVIEMBRE(11, 30),
+        DICIEMBRE(12, 31);
+
+        private int orden;
+        private int dias;
+
+       
+        Mes(int orden, int dias) {
+            this.orden = orden;
+            this.dias = dias;
+        }
+
+       
+        public int getOrden() {
+            return orden;
+        }
+
+        public int getDias() {
+            return dias;
+        }
+
+        
+        @Override
+        public String toString() {
+            return this.name() + ": Orden = " + orden + ", Días = " + dias;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       
+        System.out.println("Ingrese un número de días (28, 30 o 31):");
+        int numeroDias = scanner.nextInt();
+
+        boolean encontrado = false;
+
+       
+        for (Mes mes : Mes.values()) {
+            if (mes.getDias() == numeroDias) {
+                System.out.println(mes.toString());
+                encontrado = true;
+            }
+        }
+
+       
+        if (!encontrado) {
+            System.out.println("No hay ningún mes con " + numeroDias + " días.");
+        }
+
+        scanner.close();
+    }
+}
