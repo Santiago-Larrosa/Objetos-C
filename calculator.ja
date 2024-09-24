@@ -1,0 +1,163 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.calculator;
+ import javax.swing.*;  // Para componentes Swing
+import java.awt.*;     // Para Layouts y colores
+import java.awt.event.*;  // Para eventos de acción
+/**
+ *
+ * @author ALUMNO
+ */
+
+
+ 
+     
+       
+
+public class Calculator extends JFrame implements ActionListener {
+
+
+    private JTextField pantalla;
+    private JButton[] botonesNumericos = new JButton[10]; 
+    private JButton suma, resta, multiplicacion, division, igual, limpiar;
+    private JPanel panel;
+    
+  
+    private double numero1 = 0, numero2 = 0, resultado = 0;
+    private char operador;
+
+    public Calculator() {
+     
+        setTitle("Calculadora");
+        setSize(400, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+       
+        pantalla = new JTextField();
+        pantalla.setEditable(false); 
+        pantalla.setFont(new Font("Arial", Font.PLAIN, 36));
+        pantalla.setHorizontalAlignment(JTextField.RIGHT);
+        add(pantalla, BorderLayout.NORTH);
+
+        
+        for (int i = 0; i < 10; i++) {
+            botonesNumericos[i] = new JButton(String.valueOf(i));
+            botonesNumericos[i].setFont(new Font("Arial", Font.PLAIN, 36));
+            botonesNumericos[i].addActionListener(this);
+        }
+
+        
+        suma = new JButton("+");
+        resta = new JButton("-");
+        multiplicacion = new JButton("*");
+        division = new JButton("/");
+        igual = new JButton("=");
+        limpiar = new JButton("C");
+
+  
+        suma.addActionListener(this);
+        resta.addActionListener(this);
+        multiplicacion.addActionListener(this);
+        division.addActionListener(this);
+        igual.addActionListener(this);
+        limpiar.addActionListener(this);
+
+       
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4, 10, 10)); 
+
+       
+        panel.add(botonesNumericos[1]);
+        panel.add(botonesNumericos[2]);
+        panel.add(botonesNumericos[3]);
+        panel.add(suma);
+        panel.add(botonesNumericos[4]);
+        panel.add(botonesNumericos[5]);
+        panel.add(botonesNumericos[6]);
+        panel.add(resta);
+        panel.add(botonesNumericos[7]);
+        panel.add(botonesNumericos[8]);
+        panel.add(botonesNumericos[9]);
+        panel.add(multiplicacion);
+        panel.add(limpiar);
+        panel.add(botonesNumericos[0]);
+        panel.add(igual);
+        panel.add(division);
+
+        add(panel, BorderLayout.CENTER);
+
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < 10; i++) {
+            if (e.getSource() == botonesNumericos[i]) {
+                pantalla.setText(pantalla.getText() + i);
+            }
+        }
+
+        if (e.getSource() == suma) {
+            numero1 = Double.parseDouble(pantalla.getText());
+            operador = '+';
+            pantalla.setText("");
+        }
+
+        if (e.getSource() == resta) {
+            numero1 = Double.parseDouble(pantalla.getText());
+            operador = '-';
+            pantalla.setText("");
+        }
+
+        if (e.getSource() == multiplicacion) {
+            numero1 = Double.parseDouble(pantalla.getText());
+            operador = '*';
+            pantalla.setText("");
+        }
+
+        if (e.getSource() == division) {
+            numero1 = Double.parseDouble(pantalla.getText());
+            operador = '/';
+            pantalla.setText("");
+        }
+
+        if (e.getSource() == igual) {
+            numero2 = Double.parseDouble(pantalla.getText());
+
+            switch (operador) {
+                case '+':
+                    resultado = numero1 + numero2;
+                    break;
+                case '-':
+                    resultado = numero1 - numero2;
+                    break;
+                case '*':
+                    resultado = numero1 * numero2;
+                    break;
+                case '/':
+                    resultado = numero1 / numero2;
+                    break;
+            }
+
+            pantalla.setText(String.valueOf(resultado));
+            numero1 = resultado;
+        }
+
+        if (e.getSource() == limpiar) {
+            pantalla.setText("");
+            numero1 = 0;
+            numero2 = 0;
+            resultado = 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        new Calculator();
+    }
+}
+
+
+
